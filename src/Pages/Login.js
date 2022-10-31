@@ -1,7 +1,33 @@
 import { Box, Button, Paper, Typography } from '@mui/material';
 import React from 'react';
+import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
+import auth from '../FirebaseConfig';
 
 const Login = () => {
+  const provider = new GoogleAuthProvider();
+  const auth = getAuth();
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        const user = result.user;
+        console.log(user);
+      })
+
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        const email = error.email;
+        const credential = GoogleAuthProvider.credentialFromError(error);
+      });
+
+    navigate('/');
+  };
+
   return (
     <Box
       sx={{
@@ -45,8 +71,13 @@ const Login = () => {
           >
             Login
           </Typography>
-          <Button variant="contained" fullWidth color="primary">
-            Login
+          <Button
+            variant="contained"
+            fullWidth
+            color="primary"
+            onClick={handleLogin}
+          >
+            Login with Google
           </Button>
         </Box>
       </Paper>

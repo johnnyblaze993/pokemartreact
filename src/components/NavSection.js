@@ -11,13 +11,29 @@ import {
   Search,
   ShoppingBag,
 } from '@mui/icons-material';
-import { TextField, Tooltip } from '@mui/material';
+import { TextField, Tooltip, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
+import { getAuth, signOut } from 'firebase/auth';
+import auth from '../FirebaseConfig';
+
 export default function ButtonAppBar() {
+  const auth = getAuth();
+  const user = auth.currentUser;
   const navigate = useNavigate();
+
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        navigate('/login');
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  };
+
   return (
-    <Box sx={{ flexGrow: 1, position: 'sticky' }}>
+    <Box sx={{ flexGrow: 1, position: 'fixed', zIndex: 1000 }}>
       <AppBar
         sx={{
           padding: '0 20px',
@@ -93,7 +109,6 @@ export default function ButtonAppBar() {
               </IconButton>
             </Tooltip>
           </Box>
-
           <Box
             sx={{
               width: {
@@ -115,9 +130,40 @@ export default function ButtonAppBar() {
               label={<Search />}
             />
           </Box>
-          <Button onClick={() => navigate('/login')} color="inherit">
-            Login
-          </Button>
+          <Box
+            sx={{
+              display: {
+                xs: 'none',
+                md: 'inline-block',
+              },
+            }}
+          >
+            <Typography>Welcome</Typography>
+
+            <Typography
+              variant="h6"
+              sx={{
+                display: {
+                  xs: 'none',
+                  sm: 'inline-block',
+                },
+                fontWeight: 'bold',
+                fontSize: '.8rem',
+              }}
+            >
+              {user && user.displayName}
+            </Typography>
+          </Box>
+
+          {!user ? (
+            <Button onClick={() => navigate('/login')} color="inherit">
+              Login
+            </Button>
+          ) : (
+            <Button onClick={handleLogout} color="inherit">
+              Logout
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
     </Box>
