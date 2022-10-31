@@ -9,6 +9,21 @@ import { BrowserRouter } from 'react-router-dom';
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
+    background: {
+      default: '#2a2a2a',
+      paper: '#345e4c',
+    },
+    primary: {
+      main: '#345e4c',
+      contrastText: '##9fcaaa',
+    },
+    secondary: {
+      main: '#9fcaaa',
+      contrastText: '#345e4c',
+    },
+    text: {
+      primary: '#9fcaaa',
+    },
   },
 });
 
