@@ -17,9 +17,8 @@ import { useNavigate } from 'react-router-dom';
 export default function ButtonAppBar() {
   const navigate = useNavigate();
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, position: 'sticky' }}>
       <AppBar
-        position="static"
         sx={{
           padding: '0 20px',
         }}
