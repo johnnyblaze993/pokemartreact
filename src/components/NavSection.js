@@ -138,7 +138,7 @@ export default function ButtonAppBar() {
               },
             }}
           >
-            <Typography>Welcome</Typography>
+            <Typography>{user && 'welcome'}</Typography>
 
             <Typography
               variant="h6"

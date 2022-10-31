@@ -3,6 +3,19 @@ import React from 'react';
 import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import auth from '../FirebaseConfig';
+import { db } from '../FirebaseConfig';
+import {
+  doc,
+  getDoc,
+  getFirestore,
+  getDocs,
+  addDoc,
+  collection,
+  query,
+  where,
+  updateDoc,
+  deleteDoc,
+} from 'firebase/firestore';
 
 const Login = () => {
   const provider = new GoogleAuthProvider();
@@ -10,22 +23,36 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        const user = result.user;
-        console.log(user);
-      })
+    signInWithPopup(auth, provider).then((result) => {
+      const credential = GoogleAuthProvider.credentialFromResult(result);
 
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        const email = error.email;
-        const credential = GoogleAuthProvider.credentialFromError(error);
-      });
+      const user = result.user.displayName;
+      const email = result.user.email;
+      const photoURL = result.user.photoURL;
+      const uid = result.user.uid;
+      console.log(user, email, photoURL, uid);
 
-    navigate('/');
+      console.log(user);
+      const docRef = doc(db, 'users', uid);
+      getDoc(docRef)
+        .then((doc) => {
+          if (!doc.exists()) {
+            console.log('No such document!');
+            addDoc(collection(db, 'users'), {
+              name: user,
+              email: email,
+              photo: photoURL,
+              id: uid,
+            });
+          } else {
+            console.log('Document data:', doc.data());
+          }
+        })
+        .catch((error) => {
+          console.log('Error getting document:', error);
+        });
+      navigate('/');
+    });
   };
 
   return (
