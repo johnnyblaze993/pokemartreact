@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Home from './Pages/Home';
-import Cart from './Pages/Cart';
-import Checkout from './Pages/Checkout';
+import Cart from './Pages/cart/Cart';
+import Checkout from './Pages/checkout/Checkout';
 import Categories from './Pages/Categories';
 import { Box, Container } from '@mui/material';
 import Account from './Pages/account/Account';
@@ -9,6 +9,7 @@ import Favorited from './Pages/account/Favorited';
 import PastOrders from './Pages/account/PastOrders';
 import NavSection from './components/NavSection';
 import Login from './Pages/Login';
+import CompletedOrder from './Pages/CompletedOrder';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/favorited" element={<Favorited />} />
           <Route path="/pastOrders" element={<PastOrders />} />
           <Route path="/categories" element={<Categories />} />
+          <Route path="/completedOrder" element={<CompletedOrder />} />
           <Route path="/login" element={<Login />} />
 
           <Route path="*" element={<div>404</div>} />
