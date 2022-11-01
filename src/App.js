@@ -10,8 +10,15 @@ import PastOrders from './Pages/account/PastOrders';
 import NavSection from './components/NavSection';
 import Login from './Pages/login/Login';
 import CompletedOrder from './Pages/CompletedOrder';
+import { useEffect, useState } from 'react';
 
 function App() {
+  useEffect(() => {
+    fetch('https://dummyjson.com/products/categories')
+      .then((res) => res.json())
+      .then((json) => console.log(json));
+  }, []);
+
   return (
     <Box>
       <NavSection />
