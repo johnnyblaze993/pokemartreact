@@ -41,6 +41,16 @@ const Home = () => {
             md: '120px',
           },
         }}
+        component={motion.div}
+        whileHover={{
+          scale: 1.05,
+          backgroundColor: '#6f8d77',
+          transition: {
+            duration: 0.2,
+            type: 'spring',
+            stiffness: 80,
+          },
+        }}
       >
         <Box
           sx={{
@@ -60,7 +70,7 @@ const Home = () => {
             xs: 'column',
             md: 'flex',
           },
-          gap: '1rem',
+          gap: '.3rem',
           padding: '1rem',
         }}
       >
@@ -77,7 +87,7 @@ const Home = () => {
               md: '33%',
             },
             mb: {
-              xs: '2rem',
+              xs: '1rem',
               md: '0',
             },
             height: {
@@ -91,6 +101,9 @@ const Home = () => {
           component={motion.div}
           whileHover={{
             y: -90,
+
+            backgroundColor: '#6f8d77',
+
             transition: {
               duration: 0.06,
               type: 'spring',
@@ -113,7 +126,7 @@ const Home = () => {
               md: '33%',
             },
             mb: {
-              xs: '2rem',
+              xs: '1rem',
               md: '0',
             },
             height: {
@@ -127,6 +140,8 @@ const Home = () => {
           component={motion.div}
           whileHover={{
             y: -90,
+
+            backgroundColor: '#6f8d77',
             transition: {
               duration: 0.06,
               type: 'spring',
@@ -163,6 +178,8 @@ const Home = () => {
           component={motion.div}
           whileHover={{
             y: -90,
+
+            backgroundColor: '#6f8d77',
             transition: {
               duration: 0.06,
               type: 'spring',
