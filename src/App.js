@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import Home from './Pages/Home';
+import Home from './Pages/home/Home';
 import Cart from './Pages/cart/Cart';
 import Checkout from './Pages/checkout/Checkout';
 import Categories from './Pages/Categories';
@@ -8,7 +8,7 @@ import Account from './Pages/account/Account';
 import Favorited from './Pages/account/Favorited';
 import PastOrders from './Pages/account/PastOrders';
 import NavSection from './components/NavSection';
-import Login from './Pages/Login';
+import Login from './Pages/login/Login';
 import CompletedOrder from './Pages/CompletedOrder';
 
 function App() {

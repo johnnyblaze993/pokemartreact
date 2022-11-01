@@ -1,69 +1,11 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { getAuth } from 'firebase/auth';
-import auth from '../FirebaseConfig';
 import { Box, Paper } from '@mui/material';
 import { motion } from 'framer-motion';
+import React from 'react';
 
-const Home = () => {
-  const [data, setData] = useState(null);
-
-  const auth = getAuth();
-
-  useEffect(() => {
-    axios
-      .get('https://botw-compendium.herokuapp.com/api/v2/all?format=json')
-      .then((res) => {
-        setData(res.data);
-      });
-  }, []);
-
-  console.log(data);
-
+const HomeCards = () => {
   return (
-    <Box
-      sx={{
-        height: '100vh',
-      }}
-    >
-      <Paper
-        sx={{
-          padding: '2rem',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '1rem',
-          width: '100vw',
-          position: 'relative',
-          top: {
-            xs: '80px',
-            sm: '90px',
-            md: '120px',
-          },
-        }}
-        component={motion.div}
-        whileHover={{
-          scale: 1.05,
-          backgroundColor: '#6f8d77',
-          transition: {
-            duration: 0.2,
-            type: 'spring',
-            stiffness: 80,
-          },
-        }}
-      >
-        <Box
-          sx={{
-            height: {
-              xs: '40vh',
-              sm: '50vh',
-            },
-            width: '100%',
-          }}
-        >
-          img
-        </Box>
-      </Paper>
+    <div>
+      {' '}
       <Box
         sx={{
           display: {
@@ -190,8 +132,8 @@ const Home = () => {
           <Box> category 3</Box>
         </Paper>
       </Box>
-    </Box>
+    </div>
   );
 };
 
-export default Home;
+export default HomeCards;
