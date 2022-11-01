@@ -25,6 +25,10 @@ const Favorited = () => {
             top: '-6rem',
             left: '1rem',
             fontSize: '3rem',
+            '&:hover': {
+              transform: 'scale(1.2)',
+              transition: 'all 0.2s ease-in-out',
+            },
           }}
           onClick={() => navigate('/account')}
         />

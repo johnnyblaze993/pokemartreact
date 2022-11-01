@@ -1,7 +1,12 @@
-import { Box, Button, Paper } from '@mui/material';
+import { ArrowBack } from '@mui/icons-material';
+import { Box } from '@mui/material';
 import React from 'react';
-import { motion } from 'framer-motion';
+import Address from './Address';
+import FinalPrice from './FinalPrice';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
+
+import OrderBtn from './OrderBtn';
 
 const Checkout = () => {
   const navigate = useNavigate();
@@ -9,47 +14,32 @@ const Checkout = () => {
     <Box
       sx={{
         width: '100%',
+        position: 'relative',
       }}
     >
-      <Paper
-        sx={{
-          padding: '2rem',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '1rem',
-          width: '100%',
-          mt: '2rem',
-        }}
-        elevation={10}
+      <Box
         component={motion.div}
         whileHover={{
-          scale: 1.05,
-          backgroundColor: '#6f8d77',
-        }}
-        whileTap={{
-          scale: 0.95,
+          color: '#6f8d77',
         }}
       >
-        <Box
+        <ArrowBack
           sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexDirection: 'column',
+            position: 'absolute',
+            top: '-6rem',
+            left: '1rem',
+            fontSize: '3rem',
+            '&:hover': {
+              transform: 'scale(1.2)',
+              transition: 'all 0.2s ease-in-out',
+            },
           }}
-        >
-          <Button
-            variant="contained"
-            sx={{
-              width: '75%',
-              height: '5rem',
-            }}
-            onClick={() => navigate('/completedOrder')}
-          >
-            Place Order
-          </Button>
-        </Box>
-      </Paper>
+          onClick={() => navigate('/cart')}
+        />
+      </Box>
+      <OrderBtn />
+      <FinalPrice />
+      <Address />
     </Box>
   );
 };
