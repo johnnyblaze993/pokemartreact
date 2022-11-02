@@ -18,6 +18,7 @@ const HeroMain = () => {
           gap: '1rem',
           width: '100vw',
           position: 'relative',
+
           top: {
             xs: '80px',
             sm: '90px',

@@ -16,6 +16,8 @@ const HomeCards = ({ homeDecor }) => {
           },
           gap: '.3rem',
           padding: '1rem',
+          position: 'relative',
+          top: '-3rem',
         }}
       >
         <Paper
@@ -69,6 +71,7 @@ const HomeCards = ({ homeDecor }) => {
               sx={{
                 color: '#fff',
                 alignSelf: 'center',
+                fontWeight: 'bold',
               }}
             >
               Shop All Items
@@ -128,6 +131,7 @@ const HomeCards = ({ homeDecor }) => {
               sx={{
                 color: '#fff',
                 alignSelf: 'center',
+                fontWeight: 'bold',
               }}
             >
               View All Item Categories
@@ -187,6 +191,7 @@ const HomeCards = ({ homeDecor }) => {
               sx={{
                 color: '#fff',
                 alignSelf: 'center',
+                fontWeight: 'bold',
               }}
             >
               New Home Decor Arrivals

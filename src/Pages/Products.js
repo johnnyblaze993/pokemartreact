@@ -62,11 +62,11 @@ const Products = ({ items }) => {
               whileHover={{
                 scale: 1.05,
                 backgroundColor: '#6f8d77',
-                height: '70vh',
+                height: '60vh',
                 transition: {
-                  duration: 0.2,
+                  duration: 0.1,
                   type: 'spring',
-                  stiffness: 80,
+                  stiffness: 20,
                 },
               }}
             >
@@ -111,7 +111,6 @@ const Products = ({ items }) => {
                     alignItems: 'center',
                   }}
                 >
-                  {' '}
                   <AttachMoney /> {item.price}
                 </p>
               </Box>
@@ -125,10 +124,14 @@ const Products = ({ items }) => {
                 <motion.p
                   style={{
                     color: '#fff',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap',
                   }}
                   whileHover={{
                     overflow: 'visible',
                     whiteSpace: 'normal',
+                    textOverflow: 'none',
 
                     transition: {
                       duration: 0.2,
@@ -137,9 +140,7 @@ const Products = ({ items }) => {
                     },
                   }}
                 >
-                  {item.description.length > 50
-                    ? item.description.slice(0, 50) + '...'
-                    : item.description}
+                  {item.description}
                 </motion.p>
               </Box>
               <Box
