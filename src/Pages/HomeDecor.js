@@ -43,17 +43,19 @@ const HomeDecor = ({ homeitems }) => {
               py: '1rem',
               display: 'flex',
               flexDirection: 'column',
-              height: '45vh',
-              justifyContent: 'space-evenly',
+              height: '48vh',
+              justifyContent: 'space-around',
+              overflow: 'hidden',
             }}
             component={motion.div}
             whileHover={{
               scale: 1.05,
               backgroundColor: '#6f8d77',
+              height: '60vh',
               transition: {
-                duration: 0.2,
+                duration: 0.1,
                 type: 'spring',
-                stiffness: 80,
+                stiffness: 20,
               },
             }}
           >
@@ -101,13 +103,51 @@ const HomeDecor = ({ homeitems }) => {
                 <AttachMoney /> {item.price}
               </p>
             </Box>
-            <Rating
+            <Box
               sx={{
-                alignSelf: 'center',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
               }}
-              readOnly
-              value={item.rating}
-            />
+            >
+              <motion.p
+                style={{
+                  color: '#fff',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  whiteSpace: 'nowrap',
+                }}
+                whileHover={{
+                  overflow: 'visible',
+                  whiteSpace: 'normal',
+                  textOverflow: 'none',
+
+                  transition: {
+                    duration: 0.2,
+                    type: 'spring',
+                    stiffness: 80,
+                  },
+                }}
+              >
+                {item.description}
+              </motion.p>
+            </Box>
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <Rating
+                sx={{
+                  alignSelf: 'center',
+                }}
+                readOnly
+                value={item.rating}
+              />{' '}
+              <p>({item.rating})</p>
+            </Box>
             <Button variant="contained">Add to Cart</Button>
           </Paper>
         </Grid>

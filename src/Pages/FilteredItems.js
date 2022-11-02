@@ -132,13 +132,22 @@ const FilteredItems = ({ filteredItems }) => {
                 {item.description}
               </motion.p>
             </Box>
-            <Rating
+            <Box
               sx={{
-                alignSelf: 'center',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
-              readOnly
-              value={item.rating}
-            />
+            >
+              <Rating
+                sx={{
+                  alignSelf: 'center',
+                }}
+                readOnly
+                value={item.rating}
+              />{' '}
+              <p>({item.rating})</p>
+            </Box>
             <Button variant="contained">Add to Cart</Button>
           </Paper>
         </Grid>

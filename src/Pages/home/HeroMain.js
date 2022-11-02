@@ -83,7 +83,7 @@ const HeroMain = () => {
           initial={{ x: '100vw' }}
           animate={{ x: '-200vw' }}
           transition={{
-            duration: 15,
+            duration: 12,
             ease: 'linear',
             repeat: Infinity,
             repeatDelay: 0,

@@ -146,6 +146,8 @@ const Products = ({ items }) => {
               <Box
                 sx={{
                   display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                 }}
               >
                 <Rating
