@@ -1,8 +1,10 @@
-import { Box, Paper } from '@mui/material';
+import { Box, Button, Paper, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const HomeCards = () => {
+  const navigate = useNavigate();
   return (
     <div>
       {' '}
@@ -53,7 +55,12 @@ const HomeCards = () => {
             },
           }}
         >
-          <Box> category 1</Box>
+          <Box>
+            <Typography variant="h4">Shop All Items</Typography>
+            <Button variant="contained" onClick={() => navigate('/products')}>
+              Shop Now
+            </Button>
+          </Box>
         </Paper>
         <Paper
           sx={{

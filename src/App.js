@@ -10,14 +10,27 @@ import PastOrders from './Pages/account/PastOrders';
 import NavSection from './components/NavSection';
 import Login from './Pages/login/Login';
 import CompletedOrder from './Pages/CompletedOrder';
+import Products from './Pages/Products';
+
 import { useEffect, useState } from 'react';
 
 function App() {
+  const [categories, setCategories] = useState([]);
+  const [items, setItems] = useState([]);
+
   useEffect(() => {
     fetch('https://dummyjson.com/products/categories')
       .then((res) => res.json())
-      .then((json) => console.log(json));
+      .then((json) => setCategories(json));
   }, []);
+
+  useEffect(() => {
+    fetch('https://dummyjson.com/products?limit=100')
+      .then((res) => res.json())
+      .then((json) => setItems(json.products));
+  }, []);
+
+  console.log(items);
 
   return (
     <Box>
@@ -35,13 +48,17 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/categories" element={<Categories />} />
+          <Route
+            path="/categories"
+            element={<Categories categories={categories} />}
+          />
           <Route path="/account" element={<Account />} />
           <Route path="/favorited" element={<Favorited />} />
           <Route path="/pastOrders" element={<PastOrders />} />
           <Route path="/categories" element={<Categories />} />
           <Route path="/completedOrder" element={<CompletedOrder />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/products" element={<Products items={items} />} />
 
           <Route path="*" element={<div>404</div>} />
         </Routes>
