@@ -53,6 +53,10 @@ function App() {
     navigate('/homeDecor');
   };
 
+  const handleAddToCart = (...item) => {
+    console.log(item);
+  };
+
   return (
     <Box>
       <NavSection />
@@ -83,7 +87,12 @@ function App() {
           <Route path="/pastOrders" element={<PastOrders />} />
           <Route path="/completedOrder" element={<CompletedOrder />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/products" element={<Products items={items} />} />
+          <Route
+            path="/products"
+            element={
+              <Products handleAddToCart={handleAddToCart} items={items} />
+            }
+          />
           <Route
             path="/filteredItems"
             element={<FilteredItems filteredItems={filteredItems} />}

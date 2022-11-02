@@ -6,12 +6,6 @@ import { useNavigate } from 'react-router-dom';
 
 const Categories = ({ categories, categoryClicker }) => {
   const navigate = useNavigate();
-  // const [loading, setLoading] = React.useState(true);
-  // React.useEffect(() => {
-  //   setTimeout(() => {
-  //     setLoading(false);
-  //   }, 1000);
-  // }, []);
 
   return (
     <Grid

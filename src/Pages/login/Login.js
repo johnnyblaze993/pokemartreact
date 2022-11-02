@@ -11,13 +11,14 @@ const Login = () => {
   const auth = getAuth();
   const navigate = useNavigate();
 
+  //find uid of logged in user
+  // console.log(auth.currentUser?.uid);
+
   const handleLogin = () => {
     signInWithPopup(auth, provider).then((result) => {
       const credential = GoogleAuthProvider.credentialFromResult(result);
 
       const user = result.user;
-
-      console.log(user);
 
       navigate('/');
     });

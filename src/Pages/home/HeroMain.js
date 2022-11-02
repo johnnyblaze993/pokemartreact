@@ -1,4 +1,4 @@
-import { Box, duration, Paper, Typography } from '@mui/material';
+import { Box, Paper, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 import React from 'react';
 

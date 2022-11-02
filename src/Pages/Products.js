@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Products = ({ items }) => {
+const Products = ({ items, handleAddToCart }) => {
   const navigate = useNavigate();
   console.log(items);
 
@@ -159,7 +159,19 @@ const Products = ({ items }) => {
                 />{' '}
                 <p>({item.rating})</p>
               </Box>
-              <Button variant="contained">Add to Cart</Button>
+              <Button
+                variant="contained"
+                onClick={() =>
+                  handleAddToCart(
+                    item.title,
+                    item.price,
+                    item.thumbnail,
+                    item.id
+                  )
+                }
+              >
+                Add to Cart
+              </Button>
             </Paper>
           </Grid>
         ))}
