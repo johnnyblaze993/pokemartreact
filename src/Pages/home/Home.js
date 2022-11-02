@@ -6,7 +6,7 @@ import { Box } from '@mui/material';
 import HeroMain from './HeroMain';
 import HomeCards from './HomeCards';
 
-const Home = () => {
+const Home = ({ homeDecor }) => {
   const auth = getAuth();
 
   return (
@@ -16,7 +16,7 @@ const Home = () => {
       }}
     >
       <HeroMain />
-      <HomeCards />
+      <HomeCards homeDecor={homeDecor} />
     </Box>
   );
 };

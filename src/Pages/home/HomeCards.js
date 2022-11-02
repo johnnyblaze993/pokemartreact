@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const HomeCards = () => {
+const HomeCards = ({ homeDecor }) => {
   const navigate = useNavigate();
   return (
     <div>
@@ -55,17 +55,26 @@ const HomeCards = () => {
             },
           }}
         >
-          <Box>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-evenly',
+              height: '100%',
+              width: '100%',
+            }}
+          >
             <Typography
               variant="h4"
               sx={{
                 color: '#fff',
+                alignSelf: 'center',
               }}
             >
               Shop All Items
             </Typography>
             <Button variant="contained" onClick={() => navigate('/products')}>
-              Shop Now
+              Shop All
             </Button>
           </Box>
         </Paper>
@@ -105,7 +114,28 @@ const HomeCards = () => {
             },
           }}
         >
-          <Box> category 2</Box>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-evenly',
+              height: '100%',
+              width: '100%',
+            }}
+          >
+            <Typography
+              variant="h4"
+              sx={{
+                color: '#fff',
+                alignSelf: 'center',
+              }}
+            >
+              View All Item Categories
+            </Typography>
+            <Button variant="contained" onClick={() => navigate('/categories')}>
+              Browse Categories
+            </Button>
+          </Box>
         </Paper>
         <Paper
           sx={{
@@ -143,7 +173,28 @@ const HomeCards = () => {
             },
           }}
         >
-          <Box> category 3</Box>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-evenly',
+              height: '100%',
+              width: '100%',
+            }}
+          >
+            <Typography
+              variant="h4"
+              sx={{
+                color: '#fff',
+                alignSelf: 'center',
+              }}
+            >
+              New Home Decor Arrivals
+            </Typography>
+            <Button variant="contained" onClick={homeDecor}>
+              Shop Home Decor
+            </Button>
+          </Box>
         </Paper>
       </Box>
     </div>

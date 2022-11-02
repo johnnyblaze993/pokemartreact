@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const FilteredItems = ({ filteredItems }) => {
+const HomeDecor = ({ homeitems }) => {
   const navigate = useNavigate();
   return (
     <Grid
@@ -32,10 +32,10 @@ const FilteredItems = ({ filteredItems }) => {
               transition: 'all 0.2s ease-in-out',
             },
           }}
-          onClick={() => navigate('/categories')}
+          onClick={() => navigate('/')}
         />
       </Box>
-      {filteredItems.map((item) => (
+      {homeitems.map((item) => (
         <Grid item xs={12} sm={6} md={4}>
           <Paper
             sx={{
@@ -116,4 +116,4 @@ const FilteredItems = ({ filteredItems }) => {
   );
 };
 
-export default FilteredItems;
+export default HomeDecor;

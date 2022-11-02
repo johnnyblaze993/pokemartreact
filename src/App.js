@@ -9,6 +9,7 @@ import Favorited from './Pages/account/Favorited';
 import PastOrders from './Pages/account/PastOrders';
 import NavSection from './components/NavSection';
 import Login from './Pages/login/Login';
+import HomeDecor from './Pages/HomeDecor';
 import CompletedOrder from './Pages/CompletedOrder';
 import Products from './Pages/Products';
 import FilteredItems from './Pages/FilteredItems';
@@ -20,6 +21,7 @@ function App() {
   const [categories, setCategories] = useState([]);
   const [items, setItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
+  const [homeitems, setHomeItems] = useState([]);
   const navigate = useNavigate();
   console.log(filteredItems);
 
@@ -43,6 +45,14 @@ function App() {
     navigate('/filteredItems');
   };
 
+  const homeDecor = () => {
+    fetch('https://dummyjson.com/products/category/home-decoration')
+      .then((res) => res.json())
+      .then((json) => setHomeItems(json.products));
+
+    navigate('/homeDecor');
+  };
+
   return (
     <Box>
       <NavSection />
@@ -56,7 +66,7 @@ function App() {
         }}
       >
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home homeDecor={homeDecor} />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route
@@ -77,6 +87,10 @@ function App() {
           <Route
             path="/filteredItems"
             element={<FilteredItems filteredItems={filteredItems} />}
+          />
+          <Route
+            path="/homeDecor"
+            element={<HomeDecor homeitems={homeitems} />}
           />
 
           <Route path="*" element={<div>404</div>} />

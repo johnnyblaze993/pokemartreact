@@ -1,35 +1,13 @@
 import { ArrowBack, AttachMoney } from '@mui/icons-material';
-import {
-  Box,
-  Button,
-  Grid,
-  Paper,
-  Rating,
-  Typography,
-  Modal,
-} from '@mui/material';
+import { Box, Button, Grid, Paper, Rating } from '@mui/material';
 
 import { motion } from 'framer-motion';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
-
 const Products = ({ items }) => {
   const navigate = useNavigate();
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  console.log(items);
 
   return (
     <>
@@ -76,13 +54,15 @@ const Products = ({ items }) => {
                 py: '1rem',
                 display: 'flex',
                 flexDirection: 'column',
-                height: '40vh',
-                justifyContent: 'space-evenly',
+                height: '48vh',
+                justifyContent: 'space-around',
+                overflow: 'hidden',
               }}
               component={motion.div}
               whileHover={{
                 scale: 1.05,
                 backgroundColor: '#6f8d77',
+                height: '70vh',
                 transition: {
                   duration: 0.2,
                   type: 'spring',
@@ -142,49 +122,40 @@ const Products = ({ items }) => {
                   alignItems: 'center',
                 }}
               >
-                <p>
-                  {item.description.length > 25
-                    ? item.description.slice(0, 25) + '...'
+                <motion.p
+                  style={{
+                    color: '#fff',
+                  }}
+                  whileHover={{
+                    overflow: 'visible',
+                    whiteSpace: 'normal',
+
+                    transition: {
+                      duration: 0.2,
+                      type: 'spring',
+                      stiffness: 80,
+                    },
+                  }}
+                >
+                  {item.description.length > 50
+                    ? item.description.slice(0, 50) + '...'
                     : item.description}
-                </p>
-                <div>
-                  <Button
-                    sx={{
-                      color: '#fff',
-                    }}
-                    onClick={handleOpen}
-                  >
-                    More Info
-                  </Button>
-                  <Modal
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                  >
-                    <Box sx={style}>
-                      <Typography
-                        id="modal-modal-title"
-                        variant="h6"
-                        component="h2"
-                      >
-                        Text in a modal
-                      </Typography>
-                      <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        Duis mollis, est non commodo luctus, nisi erat porttitor
-                        ligula.
-                      </Typography>
-                    </Box>
-                  </Modal>
-                </div>
+                </motion.p>
               </Box>
-              <Rating
+              <Box
                 sx={{
-                  alignSelf: 'center',
+                  display: 'flex',
                 }}
-                readOnly
-                value={item.rating}
-              />
+              >
+                <Rating
+                  sx={{
+                    alignSelf: 'center',
+                  }}
+                  readOnly
+                  value={item.rating}
+                />{' '}
+                <p>({item.rating})</p>
+              </Box>
               <Button variant="contained">Add to Cart</Button>
             </Paper>
           </Grid>
