@@ -1,5 +1,5 @@
 import { AttachMoney } from '@mui/icons-material';
-import { Box, Button, Grid, Paper } from '@mui/material';
+import { Box, Button, Grid, Paper, Rating } from '@mui/material';
 import { motion } from 'framer-motion';
 import React from 'react';
 
@@ -21,8 +21,8 @@ const Products = ({ items }) => {
               py: '1rem',
               display: 'flex',
               flexDirection: 'column',
-              gap: '1rem',
               height: '40vh',
+              justifyContent: 'space-evenly',
             }}
             component={motion.div}
             whileHover={{
@@ -36,8 +36,8 @@ const Products = ({ items }) => {
             }}
           >
             <motion.img
-              src={item.images[0]}
-              alt={item.name}
+              src={item.thumbnail}
+              alt={item.title}
               style={{
                 width: '100%',
                 height: '18vh',
@@ -76,6 +76,13 @@ const Products = ({ items }) => {
                 <AttachMoney /> {item.price}
               </p>
             </Box>
+            <Rating
+              sx={{
+                alignSelf: 'center',
+              }}
+              name="simple-controlled"
+              value={item.rating}
+            />
             <Button variant="contained">Add to Cart</Button>
           </Paper>
         </Grid>
