@@ -60,7 +60,11 @@ const Products = ({ items }) => {
                 justifyContent: 'space-between',
               }}
             >
-              <h3>
+              <h3
+                style={{
+                  color: '#fff',
+                }}
+              >
                 {item.title.length > 20
                   ? item.title.slice(0, 20) + '...'
                   : item.title}
@@ -80,7 +84,7 @@ const Products = ({ items }) => {
               sx={{
                 alignSelf: 'center',
               }}
-              name="simple-controlled"
+              readOnly
               value={item.rating}
             />
             <Button variant="contained">Add to Cart</Button>

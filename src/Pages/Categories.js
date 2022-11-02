@@ -40,6 +40,7 @@ const Categories = ({ categories }) => {
                 textTransform: 'capitalize',
                 fontWeight: 'bold',
                 textAlign: 'center',
+                color: '#fff',
               }}
             >
               {' '}

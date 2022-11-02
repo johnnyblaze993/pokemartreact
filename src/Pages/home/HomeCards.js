@@ -56,7 +56,14 @@ const HomeCards = () => {
           }}
         >
           <Box>
-            <Typography variant="h4">Shop All Items</Typography>
+            <Typography
+              variant="h4"
+              sx={{
+                color: '#fff',
+              }}
+            >
+              Shop All Items
+            </Typography>
             <Button variant="contained" onClick={() => navigate('/products')}>
               Shop Now
             </Button>
