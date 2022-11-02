@@ -14,6 +14,10 @@ import CompletedOrder from './Pages/CompletedOrder';
 import Products from './Pages/Products';
 import FilteredItems from './Pages/FilteredItems';
 import { useNavigate } from 'react-router-dom';
+import { db, auth } from './FirebaseConfig';
+import { collection, doc, onSnapshot, querySnapshot } from 'firebase/firestore';
+
+import { getAuth } from 'firebase/auth';
 
 import { useEffect, useState } from 'react';
 
@@ -22,8 +26,14 @@ function App() {
   const [items, setItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
   const [homeitems, setHomeItems] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
+
   const navigate = useNavigate();
-  console.log(filteredItems);
+
+  //get current user uid
+  const auth = getAuth();
+  const user = auth.currentUser?.uid;
+  console.log(user);
 
   useEffect(() => {
     fetch('https://dummyjson.com/products/categories')
