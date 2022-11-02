@@ -11,12 +11,17 @@ import NavSection from './components/NavSection';
 import Login from './Pages/login/Login';
 import CompletedOrder from './Pages/CompletedOrder';
 import Products from './Pages/Products';
+import FilteredItems from './Pages/FilteredItems';
+import { useNavigate } from 'react-router-dom';
 
 import { useEffect, useState } from 'react';
 
 function App() {
   const [categories, setCategories] = useState([]);
   const [items, setItems] = useState([]);
+  const [filteredItems, setFilteredItems] = useState([]);
+  const navigate = useNavigate();
+  console.log(filteredItems);
 
   useEffect(() => {
     fetch('https://dummyjson.com/products/categories')
@@ -30,7 +35,13 @@ function App() {
       .then((json) => setItems(json.products));
   }, []);
 
-  console.log(items);
+  const categoryClicker = (category) => {
+    fetch(`https://dummyjson.com/products/category/${category}`)
+      .then((res) => res.json())
+      .then((json) => setFilteredItems(json.products));
+
+    navigate('/filteredItems');
+  };
 
   return (
     <Box>
@@ -50,15 +61,23 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route
             path="/categories"
-            element={<Categories categories={categories} />}
+            element={
+              <Categories
+                categories={categories}
+                categoryClicker={categoryClicker}
+              />
+            }
           />
           <Route path="/account" element={<Account />} />
           <Route path="/favorited" element={<Favorited />} />
           <Route path="/pastOrders" element={<PastOrders />} />
-          <Route path="/categories" element={<Categories />} />
           <Route path="/completedOrder" element={<CompletedOrder />} />
           <Route path="/login" element={<Login />} />
           <Route path="/products" element={<Products items={items} />} />
+          <Route
+            path="/filteredItems"
+            element={<FilteredItems filteredItems={filteredItems} />}
+          />
 
           <Route path="*" element={<div>404</div>} />
         </Routes>

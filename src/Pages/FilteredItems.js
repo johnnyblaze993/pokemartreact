@@ -4,16 +4,12 @@ import { motion } from 'framer-motion';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Products = ({ items }) => {
+const FilteredItems = ({ filteredItems }) => {
   const navigate = useNavigate();
-
   return (
     <Grid
       sx={{
-        mt: {
-          xs: '5rem',
-          sm: '8rem',
-        },
+        mt: '5rem',
         position: 'relative',
       }}
       container
@@ -28,10 +24,6 @@ const Products = ({ items }) => {
         <ArrowBack
           sx={{
             position: 'absolute',
-            display: {
-              xs: 'none',
-              sm: 'block',
-            },
             top: '-2.5rem',
             left: '1rem',
             fontSize: '3rem',
@@ -40,10 +32,10 @@ const Products = ({ items }) => {
               transition: 'all 0.2s ease-in-out',
             },
           }}
-          onClick={() => navigate('/')}
+          onClick={() => navigate('/categories')}
         />
       </Box>
-      {items.map((item) => (
+      {filteredItems.map((item) => (
         <Grid item xs={12} sm={6} md={4}>
           <Paper
             sx={{
@@ -76,7 +68,6 @@ const Products = ({ items }) => {
                 borderRadius: '5px',
                 filter: 'brightness(70%)',
               }}
-              //on hover change brightness to 100%
               whileHover={{
                 filter: 'brightness(100%)',
                 transition: {
@@ -110,25 +101,6 @@ const Products = ({ items }) => {
                 <AttachMoney /> {item.price}
               </p>
             </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-              }}
-            >
-              <p>
-                {item.description.length > 40
-                  ? item.description.slice(0, 30) + '...'
-                  : item.description}
-              </p>
-              <Button
-                sx={{
-                  color: '#ecf4ee',
-                }}
-              >
-                More Info
-              </Button>
-            </Box>
             <Rating
               sx={{
                 alignSelf: 'center',
@@ -144,4 +116,4 @@ const Products = ({ items }) => {
   );
 };
 
-export default Products;
+export default FilteredItems;

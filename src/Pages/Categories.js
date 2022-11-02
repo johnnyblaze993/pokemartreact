@@ -2,7 +2,7 @@ import { Button, Grid, Paper, Typography } from '@mui/material';
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const Categories = ({ categories }) => {
+const Categories = ({ categories, categoryClicker }) => {
   return (
     <Grid
       sx={{
@@ -46,7 +46,12 @@ const Categories = ({ categories }) => {
               {' '}
               {category}
             </Typography>
-            <Button variant="contained">Shop Now</Button>
+            <Button
+              variant="contained"
+              onClick={() => categoryClicker(category)}
+            >
+              Shop Now
+            </Button>
           </Paper>
         </Grid>
       ))}
