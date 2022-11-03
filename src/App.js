@@ -15,7 +15,7 @@ import Products from './Pages/Products';
 import FilteredItems from './Pages/FilteredItems';
 import { useNavigate } from 'react-router-dom';
 import { db, auth } from './FirebaseConfig';
-import { collection, doc, onSnapshot, querySnapshot } from 'firebase/firestore';
+import { addDoc, collection, doc, setDoc, getDocs } from 'firebase/firestore';
 
 import { getAuth } from 'firebase/auth';
 
@@ -26,7 +26,7 @@ function App() {
   const [items, setItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
   const [homeitems, setHomeItems] = useState([]);
-  const [cartItems, setCartItems] = useState([]);
+  const [quantity, setQuantity] = useState(1);
 
   const navigate = useNavigate();
 
@@ -34,6 +34,25 @@ function App() {
   const auth = getAuth();
   const user = auth.currentUser?.uid;
   console.log(user);
+
+  //adding to firebase cart
+  const handleAddToCart = async (...item) => {
+    console.log(item);
+    const docRef = await addDoc(collection(db, 'Cart'), {
+      title: item[0],
+      price: item[1],
+      url: item[2],
+      id: item[3],
+      description: item[5],
+      uid: user,
+      qty: item[6],
+
+      // ...item[0],
+      // ...item[0],
+    });
+    console.log('Document written with ID: ', docRef.id);
+    console.log(item[0]);
+  };
 
   useEffect(() => {
     fetch('https://dummyjson.com/products/categories')
@@ -61,10 +80,6 @@ function App() {
       .then((json) => setHomeItems(json.products));
 
     navigate('/homeDecor');
-  };
-
-  const handleAddToCart = (...item) => {
-    console.log(item);
   };
 
   return (
@@ -100,7 +115,12 @@ function App() {
           <Route
             path="/products"
             element={
-              <Products handleAddToCart={handleAddToCart} items={items} />
+              <Products
+                handleAddToCart={handleAddToCart}
+                items={items}
+                quantity={quantity}
+                setQuantity={setQuantity}
+              />
             }
           />
           <Route

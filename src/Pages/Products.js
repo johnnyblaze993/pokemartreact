@@ -1,12 +1,16 @@
-import { ArrowBack, AttachMoney } from '@mui/icons-material';
-import { Box, Button, Grid, Paper, Rating } from '@mui/material';
+import { Add, ArrowBack, AttachMoney, Remove } from '@mui/icons-material';
+import { Box, Button, Grid, Paper, Rating, Typography } from '@mui/material';
 
 import { motion } from 'framer-motion';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Products = ({ items, handleAddToCart }) => {
+const Products = ({ items, handleAddToCart, quantity, setQuantity }) => {
   const navigate = useNavigate();
+
+  const removeQuantity = (id) => {};
+
+  const addQuantity = (id) => {};
 
   return (
     <>
@@ -21,6 +25,8 @@ const Products = ({ items, handleAddToCart }) => {
         container
         spacing={3}
       >
+        {/* {BACK ARROW} */}
+
         <Box
           component={motion.div}
           whileHover={{
@@ -45,7 +51,10 @@ const Products = ({ items, handleAddToCart }) => {
             onClick={() => navigate('/')}
           />
         </Box>
-        {items.map((item) => (
+
+        {/* {START OF CARD MAP} */}
+
+        {items.map((item, idx) => (
           <Grid item xs={12} sm={6} md={4}>
             <Paper
               sx={{
@@ -69,6 +78,8 @@ const Products = ({ items, handleAddToCart }) => {
                 },
               }}
             >
+              {/* {IMAGE} */}
+
               <motion.img
                 src={item.thumbnail}
                 alt={item.title}
@@ -80,7 +91,6 @@ const Products = ({ items, handleAddToCart }) => {
                   borderRadius: '5px',
                   filter: 'brightness(70%)',
                 }}
-                //on hover change brightness to 100%
                 whileHover={{
                   filter: 'brightness(100%)',
                   transition: {
@@ -88,6 +98,9 @@ const Products = ({ items, handleAddToCart }) => {
                   },
                 }}
               />
+
+              {/* {PRICE AND TITLE} */}
+
               <Box
                 sx={{
                   display: 'flex',
@@ -113,6 +126,9 @@ const Products = ({ items, handleAddToCart }) => {
                   <AttachMoney /> {item.price}
                 </p>
               </Box>
+
+              {/* {DESCRIPTION} */}
+
               <Box
                 sx={{
                   display: 'flex',
@@ -142,6 +158,9 @@ const Products = ({ items, handleAddToCart }) => {
                   {item.description}
                 </motion.p>
               </Box>
+
+              {/* {Rating} */}
+
               <Box
                 sx={{
                   display: 'flex',
@@ -158,6 +177,44 @@ const Products = ({ items, handleAddToCart }) => {
                 />{' '}
                 <p>({item.rating})</p>
               </Box>
+
+              {/* {Quantity} */}
+
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                }}
+              >
+                <Button
+                  variant="contained"
+                  onCLick={() => addQuantity(item.id)}
+                >
+                  <Add />
+                </Button>
+                <Typography
+                  sx={{
+                    backgroundColor: '#6f8d77',
+                    color: '#fff',
+                    padding: '.5rem',
+                    width: '50%',
+                    textAlign: 'center',
+                  }}
+                  variant="h6"
+                >
+                  {quantity}
+                </Typography>
+                <Button
+                  variant="contained"
+                  onClick={() => removeQuantity(item.id)}
+                >
+                  <Remove />
+                </Button>
+              </Box>
+
+              {/* {ADD TO CART} */}
+
               <Button
                 variant="contained"
                 onClick={() =>
@@ -165,7 +222,11 @@ const Products = ({ items, handleAddToCart }) => {
                     item.title,
                     item.price,
                     item.thumbnail,
-                    item.id
+                    item.id,
+                    item.rating,
+                    item.description,
+                    item.stock,
+                    idx
                   )
                 }
               >
