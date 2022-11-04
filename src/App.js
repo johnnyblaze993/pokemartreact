@@ -15,7 +15,14 @@ import Products from './Pages/Products';
 import FilteredItems from './Pages/FilteredItems';
 import { useNavigate } from 'react-router-dom';
 import { db, auth } from './FirebaseConfig';
-import { addDoc, collection, doc, setDoc, getDocs } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  doc,
+  setDoc,
+  getDocs,
+  updateDoc,
+} from 'firebase/firestore';
 
 import { getAuth } from 'firebase/auth';
 
@@ -27,17 +34,20 @@ function App() {
   const [filteredItems, setFilteredItems] = useState([]);
   const [homeitems, setHomeItems] = useState([]);
   const [quantity, setQuantity] = useState(1);
+  const [cartItems, setCartItems] = useState([]);
+  const [updatedCartItems, setUpdatedCartItems] = useState([]);
 
   const navigate = useNavigate();
 
   //get current user uid
   const auth = getAuth();
   const user = auth.currentUser?.uid;
-  console.log(user);
 
   //adding to firebase cart
   const handleAddToCart = async (...item) => {
-    console.log(item);
+    if (!user) {
+      navigate('/login');
+    }
     const docRef = await addDoc(collection(db, 'Cart'), {
       title: item[0],
       price: item[1],
@@ -45,27 +55,68 @@ function App() {
       id: item[3],
       description: item[5],
       uid: user,
-      qty: item[6],
-
-      // ...item[0],
-      // ...item[0],
+      qty: 1,
     });
     console.log('Document written with ID: ', docRef.id);
-    console.log(item[0]);
+
+    const quantityHandler = (id) => {};
   };
 
+  //setting the firestore cart to cartItems
+  const getCartItems = async () => {
+    const docRef = await getDocs(collection(db, 'Cart'));
+    const docSnap = await docRef.docs.map((doc) => doc.data());
+    setCartItems(docSnap);
+  };
+
+  useEffect(() => {
+    getCartItems();
+  }, []);
+
+  //Removing quantity from cart
+  const removeQuantity = async (id) => {};
+
+  //Adding quantity to cart
+  const addQuantity = async (id) => {
+    //count how many items in cartItems have the same id. that number is the quantity
+  };
+
+  const cartUpdater = () => {
+    //if items in cart have the same id, add the quantity
+    //if items in cart have different id, add the item
+
+    const updatedCart = cartItems.reduce((acc, item) => {
+      const found = acc.find((i) => i.id === item.id);
+      if (found) {
+        found.qty += item.qty;
+      } else {
+        acc.push(item);
+      }
+      return acc;
+    }, []);
+    setUpdatedCartItems(updatedCart);
+  };
+
+  useEffect(() => {
+    cartUpdater();
+  }, [cartItems]);
+  console.log(updatedCartItems);
+
+  //APi call for categories
   useEffect(() => {
     fetch('https://dummyjson.com/products/categories')
       .then((res) => res.json())
       .then((json) => setCategories(json));
   }, []);
 
+  //Api call for All items
   useEffect(() => {
     fetch('https://dummyjson.com/products?limit=100')
       .then((res) => res.json())
       .then((json) => setItems(json.products));
   }, []);
 
+  //Api call for category chosen
   const categoryClicker = (category) => {
     fetch(`https://dummyjson.com/products/category/${category}`)
       .then((res) => res.json())
@@ -74,6 +125,7 @@ function App() {
     navigate('/filteredItems');
   };
 
+  //Api call for home decor
   const homeDecor = () => {
     fetch('https://dummyjson.com/products/category/home-decoration')
       .then((res) => res.json())
@@ -118,8 +170,11 @@ function App() {
               <Products
                 handleAddToCart={handleAddToCart}
                 items={items}
+                addQuantity={addQuantity}
+                removeQuantity={removeQuantity}
                 quantity={quantity}
                 setQuantity={setQuantity}
+                updatedCartItems={updatedCartItems}
               />
             }
           />

@@ -5,12 +5,16 @@ import { motion } from 'framer-motion';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Products = ({ items, handleAddToCart, quantity, setQuantity }) => {
+const Products = ({
+  items,
+  handleAddToCart,
+  removeQuantity,
+  addQuantity,
+  quantity,
+  setQuantity,
+  updatedCartItems,
+}) => {
   const navigate = useNavigate();
-
-  const removeQuantity = (id) => {};
-
-  const addQuantity = (id) => {};
 
   return (
     <>
@@ -225,8 +229,7 @@ const Products = ({ items, handleAddToCart, quantity, setQuantity }) => {
                     item.id,
                     item.rating,
                     item.description,
-                    item.stock,
-                    idx
+                    item.stock
                   )
                 }
               >
